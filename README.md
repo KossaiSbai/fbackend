@@ -53,14 +53,12 @@ CREATE DATABASE submissions_db;
 Run the following SQL script to set up the required schema:
 
 ```sql
--- Create brands table
 CREATE TABLE brands (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     description TEXT
 );
 
--- Create briefs table
 CREATE TABLE briefs (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -69,13 +67,11 @@ CREATE TABLE briefs (
     brand_id INTEGER REFERENCES brands(id)
 );
 
--- Create influencers table
 CREATE TABLE influencers (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL
 );
 
--- Create submissions table
 CREATE TABLE submissions (
     id SERIAL PRIMARY KEY,
     influencer_id INTEGER REFERENCES influencers(id),
@@ -92,23 +88,19 @@ CREATE TABLE submissions (
 Insert sample records into the database:
 
 ```sql
--- Insert brands
 INSERT INTO brands (name, description) VALUES 
 ('Brand A', 'A brand focused on creativity and collaboration.'),
 ('Brand B', 'A brand that promotes productivity tools.');
 
--- Insert briefs
 INSERT INTO briefs (name, content, brand_id) VALUES 
 ('Visual Creator Brief', 'Create a video showcasing how Milanote helps organize creative projects.', 1),
 ('Game Design Brief', 'Showcase the game design process using Milanote as a planning tool.', 2);
 
--- Insert influencers
 INSERT INTO influencers (name) VALUES 
 ('Sarah'), 
 ('Michael'), 
 ('Trond');
 
--- Insert submissions
 INSERT INTO submissions (influencer_id, brief_id, text, status, brand_id, feedback) VALUES 
 (1, 1, 'Draft script for Visual Creator Brief', 'pending', 1, NULL),
 (2, 2, 'Game design video topic submission', 'pending', 2, NULL),
